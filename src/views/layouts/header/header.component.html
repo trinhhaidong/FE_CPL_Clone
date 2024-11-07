@@ -38,7 +38,8 @@
           <!-- Navbar --> 
           <nav class="navbar">
 
-            <a class="nav-btn" href="index-2.html">home</a>
+            <a class="nav-btn" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">home</a>
+    
 
             <div class="dropdown-menu">
               <button class="nav-btn">about <i class="fas fa-angle-down"></i> </button>
@@ -56,9 +57,9 @@
                 <a href="pages/Pages/Sevices.html">Services</a>
                 <a href="pages/Pages/Single-Service.html">Single Service</a>
                 <a href="pages/Pages/Gallery.html">Gallery</a>
-                <a href="pages/Pages/Login.html">login</a>
-                <a href="pages/Pages/Register.html">register</a>
-                <a href="pages/Pages/Reset-Password.html">forgotPwd</a>
+                <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+                <a routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
+                <a routerLink="/resetPassword" routerLinkActive="active" ariaCurrentWhenActive="page">Forgot Password</a>
               </div>
             </div>
 
