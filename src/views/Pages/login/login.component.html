@@ -2,10 +2,11 @@
 
   <div class="title">
     <h2>login</h2>
-  </div> 
+  </div>
 
   <div class="link">
-    <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-house-chimney"></i> Home</a>
+    <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page"><i
+        class="fa-solid fa-house-chimney"></i> Home</a>
     <i class="fa-solid fa-angle-right"></i>
     <span class="page">login</span>
   </div>
@@ -14,35 +15,46 @@
 <!-- ==================== Page-Title (End) ==================== -->
 
 
-
 <!-- ==================== Login Area (Start) ==================== -->
-<section class="login">
+<!-- Success Message -->
+<div *ngIf="successMessage" class="alert alert-success">
+  {{ successMessage }}
+</div>
 
-  <form class="account-form" action="https://elitecars-html.asdesignsgalaxy.com/pages/Pages/example.php">
+<!-- Error Message -->
+<div *ngIf="errors.general" class="alert alert-danger">
+  {{ errors.general }}
+</div>
+
+<section class="login">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="account-form">
     <div class="icon"><i class="fa-solid fa-user"></i></div>
     <h3>login</h3>
+
     <div class="input-field">
       <label for="email" class="far fa-envelope"></label>
-      <input type="email" name="email" placeholder="enter your email" id="email" class="box">
+      <input type="email" formControlName="email" placeholder="enter your email" id="email" class="box"
+        [ngClass]="{ 'is-invalid': isInvalid('email') }" />
+      <div class="invalid-feedback" *ngIf="isInvalid('email')">
+        {{ getFormError('email', 'Email') }}
+      </div>
     </div>
+
     <div class="input-field">
-      <label for="password" class="fas fa-lock"></label> 
-      <input type="password" name="password" placeholder="enter your password" id="password" class="box">
-    </div>
-
-    <div class="info">
-      <div class="remember">
-        <input type="checkbox" name="remember" id="remember-me">
-        <label for="remember-me"> remember me </label>
-      </div>
-      <div class="forgot">
-        <a class="link" routerLink="/resetPassword" routerLinkActive="active" ariaCurrentWhenActive="page">forgot password?</a>
+      <label for="password" class="fas fa-lock"></label>
+      <input type="password" formControlName="password" placeholder="enter your password" id="password" class="box"
+        [ngClass]="{ 'is-invalid': isInvalid('password') }" />
+      <div class="invalid-feedback" *ngIf="isInvalid('password')">
+        {{ getFormError('password', 'Password') }}
       </div>
     </div>
-    <button type="submit" class="btn" name="login" id="login-btn">login</button>
-    <p>don't have an account? <a class="link" routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">register</a></p>
-  </form> 
 
-</section> 
+    <button type="submit" class="btn" id="login-btn">login</button>
+    <p *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</p>
+    <p>don't have an account? <a class="link" routerLink="/register" routerLinkActive="active"
+        ariaCurrentWhenActive="page">register</a></p>
+  </form>
+</section>
+
+
 <!-- ==================== Login Area (End) ==================== -->
-  
