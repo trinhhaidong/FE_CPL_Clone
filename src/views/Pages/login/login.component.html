@@ -17,15 +17,9 @@
 
 <!-- ==================== Login Area (Start) ==================== -->
 <!-- Success Message -->
-<div *ngIf="successMessage" class="alert alert-success">
-  {{ successMessage }}
-</div>
 
-<!-- Error Message -->
-<div *ngIf="errors.general" class="alert alert-danger">
-  {{ errors.general }}
-</div>
-
+<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 <section class="login">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="account-form">
     <div class="icon"><i class="fa-solid fa-user"></i></div>
