@@ -12,15 +12,7 @@ export const routes: Routes = [
     {
         path: 'home',
         component: HomePageComponent,
-        children: [
-            {
-                path: 'resetPassword', component: ResetPasswordComponent,
-                title: 'Quản lý người dùng',
-                canActivate: [AuthGuard, RoleGuard],
-                data: {
-                    roles: ['Admin', 'Customer']
-                }
-            },            
+        children: [                       
             {
                 path: 'access-denied', component: AccessDeniedComponent,
                 title: 'Quản lý cài đặt',
@@ -42,6 +34,12 @@ export const routes: Routes = [
         path: 'register',
         title: 'Đăng ký',
         component: RegisterComponent,
+
+    },    
+    {
+        path: 'reset-password',
+        title: 'Đăng ký',
+        component: ResetPasswordComponent,
 
     },
     //    { path: '', redirectTo: 'login', pathMatch: 'full' }
