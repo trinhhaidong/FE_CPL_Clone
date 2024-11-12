@@ -80,4 +80,18 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Please fill out all fields correctly.';
     }
   }
+  loginWithGoogle(): void {
+    this.authService.loginWithGoogle().subscribe(
+      response => {
+        this.successMessage = 'Login successful';
+        this.errorMessage = null;
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.successMessage = null;
+        this.errorMessage = error.message || 'Login failed. Please try again.';
+      }
+    );
+  
+  }
 }

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Auth, GoogleAuthProvider, signInWithPopup, UserCredential } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private apiService: ApiService, private router: Router) { }
+  constructor(private apiService: ApiService, private router: Router, private auth: Auth) { }
 
   login(email: string, password: string): Observable<any> {
     let payload = { email, password };
@@ -23,6 +24,19 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['/home']);
   }
+  loginWithGoogle(): Observable<UserCredential> {
+    const provider = new GoogleAuthProvider();
+    return new Observable(observer => {
+      signInWithPopup(this.auth, provider).then(
+        res => observer.next(res),
+        err => observer.error(err)
+      );
+    });
+  
+  }
+  // logout(): Promise<void> {
+  //   return this.auth.signOut();
+  // }
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');

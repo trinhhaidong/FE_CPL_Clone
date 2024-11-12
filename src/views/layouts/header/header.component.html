@@ -106,7 +106,7 @@
     <nav class="mobile-navbar">
 
       <div class="nav-link">
-        <div class="main-nav-link"> <a class="nav-btn" href="index-2.html">home</a> </div>
+        <div class="main-nav-link"> <a class="nav-btn" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">home</a> </div>
       </div>
 
       <div class="nav-link">
@@ -129,9 +129,10 @@
           <a href="pages/Pages/Sevices.html">Services</a>
           <a href="pages/Pages/Single-Service.html">Single Service</a>
           <a href="pages/Pages/Gallery.html">Gallery</a>
-          <a href="pages/Pages/Login.html">login</a>
-          <a href="pages/Pages/Register.html">register</a>
-          <a href="pages/Pages/Reset-Password.html">forgotPwd</a>
+          <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+          <a *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
+          <a *ngIf="!authService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" ariaCurrentWhenActive="page">Forgot Password</a>
+          <a *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn-logout">Logout</a>
         </div>
       </div>
 
