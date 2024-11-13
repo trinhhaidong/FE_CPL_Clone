@@ -15,21 +15,26 @@
     <h3>Register</h3>
 
     <div class="input-field">
+      <label for="name" class="fas fa-user"></label>
+      <input type="text" formControlName="name" placeholder="Enter your name" id="name" class="box" [ngClass]="{ 'is-invalid': isInvalid('name') }" />
+    </div>
+    <div *ngIf="isInvalid('name')" style="color: red" class="box">
+      {{ getFormError("name", "Name") }}
+    </div>
+    <div class="input-field">
       <label for="email" class="far fa-envelope"></label>
       <input type="email" formControlName="email" placeholder="Enter your email" id="email" class="box" [ngClass]="{ 'is-invalid': isInvalid('email') }" />
     </div>
     <div *ngIf="isInvalid('email')" style="color: red" class="box">
       {{ getFormError("email", "Email") }}
-    </div>
-
+    </div>    
     <div class="input-field">
       <label for="phoneNumber" class="fas fa-phone"></label>
-      <input type="text" formControlName="phoneNumber" placeholder="Enter your phone number" id="phoneNumber" class="box" [ngClass]="{ 'is-invalid': isInvalid('phoneNumber') }" />
+      <input type="text" formControlName="phoneNumber" placeholder="Enter your phoneNumber" id="phoneNumber" class="box" [ngClass]="{ 'is-invalid': isInvalid('phoneNumber') }" />
     </div>
     <div *ngIf="isInvalid('phoneNumber')" style="color: red" class="box">
-      {{ getFormError("phoneNumber", "Phone Number") }}
+      {{ getFormError("phoneNumber", "PhoneNumber") }}
     </div>
-
     <div class="input-field">
       <label for="password" class="fas fa-lock"></label>
       <input type="password" formControlName="password" placeholder="Enter your password" id="password" class="box" [ngClass]="{ 'is-invalid': isInvalid('password') }" />

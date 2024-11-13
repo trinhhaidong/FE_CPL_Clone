@@ -15,8 +15,8 @@ export class AuthService {
     return this.apiService.login(payload);
   }
 
-  signup(email: string, password: string, phoneNumber: string): Observable<any> {
-    let payload = { email, password, phoneNumber };
+  signup( name: string,email: string, phoneNumber:string,password: string): Observable<any> {
+    let payload = { name,email,phoneNumber,password };
     return this.apiService.signup(payload);
   }
 

@@ -24,6 +24,7 @@ export class RegisterComponent {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).*$/;
 
     this.registerForm = this.fb.group({
+      name: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(passwordPattern)]],
@@ -55,8 +56,8 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const { email, password, phoneNumber } = this.registerForm.value;
-      this.authService.signup(email, password, phoneNumber).subscribe(
+      const { name ,email,phoneNumber,password} = this.registerForm.value;
+      this.authService.signup(name,email,phoneNumber,password).subscribe(
         response => {
           this.successMessage = 'Register successful';
           this.errorMessage = null;
