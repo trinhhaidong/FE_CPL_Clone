@@ -33,10 +33,7 @@ export class AuthService {
       );
     });
   
-  }
-  // logout(): Promise<void> {
-  //   return this.auth.signOut();
-  // }
+  }  
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
