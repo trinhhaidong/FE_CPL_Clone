@@ -6,6 +6,7 @@ import { AccessDeniedComponent } from '../views/About/access-denied/access-denie
 import { ResetPasswordComponent } from '../views/Pages/reset-password/reset-password.component';
 import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
+import { RentedCarsComponent } from '../views/Cars/rented-cars/rented-cars.component';
 
 export const routes: Routes = [
 
@@ -40,8 +41,18 @@ export const routes: Routes = [
         path: 'reset-password',
         title: 'Đăng ký',
         component: ResetPasswordComponent,
-
+        
     },
+    {
+        path: 'rented-cars',
+        title: 'List Car Rented',
+        component: RentedCarsComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['customer']
+        }  
+      }
+      ,   
     //    { path: '', redirectTo: 'login', pathMatch: 'full' }
     { path: '', redirectTo: "/home", pathMatch: 'full' },
     { path: '**', redirectTo: "/login" }

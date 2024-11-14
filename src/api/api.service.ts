@@ -20,4 +20,5 @@ export class ApiService {
   signup(data: any): Observable<any>{
     return this.http.post<any>('https://localhost:44360/api/General/register', data);
   }
+  
 }

@@ -68,6 +68,7 @@
           <div class="dropdown-menu">
             <button class="nav-btn">cars <i class="fas fa-angle-down"></i> </button>
             <div class="dropdown-content">
+              <a *ngIf="authService.isLoggedIn()"  routerLink="/rented-cars" routerLinkActive="active" ariaCurrentWhenActive="page">Rented Car</a>
               <a href="pages/Cars/Car-Grid.html">car grid</a>
               <a href="pages/Cars/Car-List.html">car list</a>
               <a href="pages/Cars/Single-Car.html">single car</a>
@@ -129,7 +130,7 @@
           <a href="pages/Pages/Sevices.html">Services</a>
           <a href="pages/Pages/Single-Service.html">Single Service</a>
           <a href="pages/Pages/Gallery.html">Gallery</a>
-          <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+          <a  *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
           <a *ngIf="!authService.isLoggedIn()" routerLink="/register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
           <a *ngIf="!authService.isLoggedIn()" routerLink="/reset-password" routerLinkActive="active" ariaCurrentWhenActive="page">Forgot Password</a>
           <a *ngIf="authService.isLoggedIn()" (click)="logout()" class="btn-logout">Logout</a>
@@ -141,6 +142,7 @@
           <div class="nav-btn">cars</div> <i class="fas fa-plus"></i>
         </div>
         <div class="sub-nav-link">
+          <a *ngIf="authService.isLoggedIn()"  routerLink="/rented-cars" routerLinkActive="active" ariaCurrentWhenActive="page">Rented Car</a>
           <a href="pages/Cars/Car-Grid.html">car grid</a>
           <a href="pages/Cars/Car-List.html">car list</a>
           <a href="pages/Cars/Single-Car.html">single car</a>
