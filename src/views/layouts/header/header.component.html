@@ -12,10 +12,10 @@
 
       <!-- Contacts -->
       <ul class="social-contacts">
-        <li><a href="#" class="fab fa-facebook-f"></a></li>
-        <li><a href="#" class="fa-brands fa-x-twitter"></a></li>
-        <li><a href="#" class="fab fa-instagram"></a></li>
-        <li><a href="#" class="fab fa-linkedin"></a></li>
+        <li><a href="#" class="fab fa-facebook-f" aria-label="Facebook"></a></li>
+        <li><a href="#" class="fa-brands fa-x-twitter" aria-label="Twitter"></a></li>
+        <li><a href="#" class="fab fa-instagram" aria-label="Instagram"></a></li>
+        <li><a href="#" class="fab fa-linkedin" aria-label="LinkedIn"></a></li>
       </ul>
 
     </div>
@@ -54,7 +54,7 @@
          <div class="dropdown-menu">
   <button class="nav-btn">Pages <i class="fas fa-angle-down"></i></button>
   <div class="dropdown-content">
-    <a href="pages/Pages/Sevices.html">Services</a>
+    <a href="pages/Pages/Services.html">Services</a>
     <a href="pages/Pages/Single-Service.html">Single Service</a>
     <a href="pages/Pages/Gallery.html">Gallery</a>
     <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
@@ -87,6 +87,7 @@
           </div>
 
           <a class="nav-btn" href="pages/Contact/contact.html">contact</a>
+          <a class="nav-btn" routerLink="/profile" routerLinkActive="active" ariaCurrentWhenActive="page">Profile</a>
 
         </nav>
 
@@ -127,7 +128,7 @@
           <div class="nav-btn">pages</div> <i class="fas fa-plus"></i>
         </div>
         <div class="sub-nav-link">
-          <a href="pages/Pages/Sevices.html">Services</a>
+          <a href="pages/Pages/Services.html">Services</a>
           <a href="pages/Pages/Single-Service.html">Single Service</a>
           <a href="pages/Pages/Gallery.html">Gallery</a>
           <a  *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
