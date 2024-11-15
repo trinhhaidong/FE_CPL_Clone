@@ -9,41 +9,21 @@ import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
 
 export const routes: Routes = [
-
-    {
-        path: 'home',
-        component: HomePageComponent,
-        children: [                       
-            {
-                path: 'access-denied', component: AccessDeniedComponent,
-                title: 'Quản lý cài đặt',
-                canActivate: [AuthGuard],
-                data: {
-                    roles: ['Admin']
-                }
-            },
-
-            // Add more child routes as needed
-        ]
-    },
-    {
-        path: 'login',
-        title: 'Đăng nhập',
-        component: LoginComponent,
-    },
-    {
-        path: 'register',
-        title: 'Đăng ký',
-        component: RegisterComponent,
-
-    },    
-    {
-        path: 'reset-password',
-        title: 'Đăng ký',
-        component: ResetPasswordComponent,
-
-    },
-    {
+  {
+    path: 'home',
+    component: HomePageComponent,
+    children: [
+      // {
+      //   path: 'access-denied',
+      //   component: ,
+      //   title: 'Quản lý cài đặt',
+      //   canActivate: [AuthGuard, RoleGuard],
+      //   data: {
+      //     roles: ['customer'] // Vai trò được phép truy cập
+      //   }
+      // },
+      // Add more child routes as needed
+      {
         path: 'car-grid',
         title: 'Car Grid',
         component: CarGridComponent,
@@ -52,12 +32,29 @@ export const routes: Routes = [
             roles: ['customer']
         } 
     },
-    //    { path: '', redirectTo: 'login', pathMatch: 'full' }
-    { path: '', redirectTo: "/home", pathMatch: 'full' },
-    { path: '**', redirectTo: "/login" }
+    ]
+  },
+  {
+    path: 'login',
+    title: 'Đăng nhập',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    title: 'Đăng ký',
+    component: RegisterComponent,
+  },
+  {
+    path: 'reset-password',
+    title: 'Đặt lại mật khẩu',
+    component: ResetPasswordComponent,
+  },
+  {
+    path: 'access-denied',
+    title: 'Not Found',
+    component: AccessDeniedComponent,
+  },
+
+  { path: '', redirectTo: "/home", pathMatch: 'full' },
+  { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];
-
-
-
-
-

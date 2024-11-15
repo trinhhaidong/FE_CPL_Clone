@@ -1,0 +1,35 @@
+.access-denied-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Chiều cao toàn màn hình */
+  text-align: center;
+  background-color: #f8f9fa; /* Màu nền tùy chọn */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.access-denied-container h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.access-denied-container p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.access-denied-container .btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.access-denied-container .btn:hover {
+  background-color: #0056b3;
+}

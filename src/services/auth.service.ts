@@ -36,18 +36,20 @@ export class AuthService {
   }  
 
   isLoggedIn(): boolean {
+    return !!localStorage.getItem('token'); // Kiểm tra xem người dùng đã đăng nhập hay chưa
+  }
+
+  getUserRole(): string {
+    return localStorage.getItem('role') || ''; // Lấy vai trò của người dùng từ localStorage
+  }
+
+  getUserId(): string | null {
     const token = localStorage.getItem('token');
     if (token) {
-      const tokenData = this.parseJwt(token);
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (tokenData && tokenData.exp > currentTime) {
-        return true;
-      } else {
-        this.logout();
-        return false;
-      }
+      const decodedToken = this.parseJwt(token);
+      return decodedToken ? decodedToken.sub : null; // 'sub' is the standard claim for subject (UserId)
     }
-    return false;
+    return null;
   }
 
   private parseJwt(token: string): any {
@@ -58,20 +60,10 @@ export class AuthService {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
       return JSON.parse(jsonPayload);
-    } catch (e) {
+    } catch (error) {
       return null;
     }
   }
-
-  getRoles(): string {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = this.parseJwt(token);
-      return decodedToken ? decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] : '';
-    }
-    return '';
-  }
-
 
   private handleError(error: any) {
     let errorMessage = '';
