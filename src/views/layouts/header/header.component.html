@@ -68,11 +68,11 @@
           <div class="dropdown-menu">
             <button class="nav-btn">cars <i class="fas fa-angle-down"></i> </button>
             <div class="dropdown-content">
-              <a href="pages/Cars/Car-Grid.html">car grid</a>
-              <a href="pages/Cars/Car-List.html">car list</a>
-              <a href="pages/Cars/Single-Car.html">single car</a>
-              <a href="pages/Cars/Cart.html">cart</a>
-              <a href="pages/Cars/Checkout.html">checkout</a>
+              <a *ngIf="authService.isLoggedIn()"  routerLink="/car-grid" routerLinkActive="active" ariaCurrentWhenActive="page">car grid</a>
+              <a href="Cars/Cars/Car-List.html">car list</a>
+              <a href="Cars/Cars/Single-Car.html">single car</a>
+              <a href="Cars/Cars/Cart.html">cart</a>
+              <a href="Cars/Cars/Checkout.html">checkout</a>
             </div>
           </div>
 
