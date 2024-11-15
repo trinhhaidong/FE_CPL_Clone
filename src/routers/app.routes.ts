@@ -4,6 +4,7 @@ import { HomePageComponent } from '../views/Pages/home-page/home-page.component'
 import { RegisterComponent } from '../views/Pages/register/register.component';
 import { AccessDeniedComponent } from '../views/About/access-denied/access-denied.component';
 import { ResetPasswordComponent } from '../views/Pages/reset-password/reset-password.component';
+import { CarGridComponent } from '../views/Cars/car-grid/car-grid.component'; 
 import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
 
@@ -41,6 +42,15 @@ export const routes: Routes = [
         title: 'Đăng ký',
         component: ResetPasswordComponent,
 
+    },
+    {
+        path: 'car-grid',
+        title: 'Car Grid',
+        component: CarGridComponent,
+        canActivate: [AuthGuard],
+        data: {
+            roles: ['customer']
+        } 
     },
     //    { path: '', redirectTo: 'login', pathMatch: 'full' }
     { path: '', redirectTo: "/home", pathMatch: 'full' },
