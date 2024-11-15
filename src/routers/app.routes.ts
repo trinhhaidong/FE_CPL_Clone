@@ -6,38 +6,42 @@ import { AccessDeniedComponent } from '../views/About/access-denied/access-denie
 import { ResetPasswordComponent } from '../views/Pages/reset-password/reset-password.component';
 import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
+import { ChangePasswordComponent } from '../views/Pages/change-password/change-password.component';
+import { ProfileComponent } from '../views/Pages/profile/profile.component';
 
 export const routes: Routes = [
   {
     path: 'home',
+    title: 'Home',
     component: HomePageComponent,
-    children: [
-      // {
-      //   path: 'access-denied',
-      //   component: ,
-      //   title: 'Quản lý cài đặt',
-      //   canActivate: [AuthGuard, RoleGuard],
-      //   data: {
-      //     roles: ['customer'] // Vai trò được phép truy cập
-      //   }
-      // },
-      // Add more child routes as needed
-    ]
+    
   },
   {
     path: 'login',
-    title: 'Đăng nhập',
+    title: 'login',
     component: LoginComponent,
   },
   {
     path: 'register',
-    title: 'Đăng ký',
+    title: 'Register',
     component: RegisterComponent,
   },
   {
     path: 'reset-password',
-    title: 'Đặt lại mật khẩu',
+    title: 'Reset Password',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'change-password',
+    title: 'Change Password',
+    canActivate: [AuthGuard],
+    component: ChangePasswordComponent,
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'access-denied',

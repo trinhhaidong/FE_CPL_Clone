@@ -1,0 +1,30 @@
+<div class="page-title">
+  <div class="title">
+    <h2>Profile</h2>
+  </div>
+  <div class="link">
+    <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <i class="fa-solid fa-house-chimney"></i> Home
+    </a>
+    <i class="fa-solid fa-angle-right"></i>
+    <span class="page">Profile</span>
+  </div>
+</div>
+
+<section class="profile">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="!errorMessage">
+    <div class="profile-card">
+      <div class="profile-photo-container">
+        <img [src]="userProfile.photoUrl || 'assets/images/default-profile.png'" alt="Profile Photo" class="profile-photo">
+      </div>
+      <div class="profile-info">
+        <h3>{{ userProfile.name }}</h3>
+        <p><strong>Email:</strong> {{ userProfile.email }}</p>
+        <p><strong>Phone Number:</strong> {{ userProfile.phoneNumber }}</p>
+      </div>
+    </div>
+  </div>
+</section>

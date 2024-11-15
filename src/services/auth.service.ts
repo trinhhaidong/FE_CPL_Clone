@@ -22,7 +22,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
   loginWithGoogle(): Observable<UserCredential> {
     const provider = new GoogleAuthProvider();
@@ -34,6 +34,11 @@ export class AuthService {
     });
   
   }  
+
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    const payload = { oldPassword, newPassword };
+    return this.apiService.changePassword(payload);
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token'); // Kiểm tra xem người dùng đã đăng nhập hay chưa
@@ -50,6 +55,10 @@ export class AuthService {
       return decodedToken ? decodedToken.sub : null; // 'sub' is the standard claim for subject (UserId)
     }
     return null;
+  }
+
+  getProfile(): Observable<any> {
+    return this.apiService.getProfile();
   }
 
   private parseJwt(token: string): any {

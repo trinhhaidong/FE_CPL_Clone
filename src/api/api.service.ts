@@ -20,4 +20,12 @@ export class ApiService {
   signup(data: any): Observable<any>{
     return this.http.post<any>('https://localhost:44360/api/General/register', data);
   }
+
+  changePassword(data: any): Observable<any>{
+    return this.http.post<any>('https://localhost:44360/api/General/change-password', data, this.headerCustom);
+  }
+  
+  getProfile(): Observable<any> {
+    return this.http.get<any>('https://localhost:44360/api/General/Get-profile', this.headerCustom);
+  }
 }
