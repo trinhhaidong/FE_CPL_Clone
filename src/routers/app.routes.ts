@@ -13,25 +13,7 @@ export const routes: Routes = [
     path: 'home',
     component: HomePageComponent,
     children: [
-      // {
-      //   path: 'access-denied',
-      //   component: ,
-      //   title: 'Quản lý cài đặt',
-      //   canActivate: [AuthGuard, RoleGuard],
-      //   data: {
-      //     roles: ['customer'] // Vai trò được phép truy cập
-      //   }
-      // },
-      // Add more child routes as needed
-      {
-        path: 'rented-cars',
-        title: 'List Car Rented',
-        component: RentedCarsComponent,
-        canActivate: [AuthGuard],
-        data: {
-            roles: ['customer']
-        }  
-      }
+      
     ]
   },
   {
@@ -53,6 +35,14 @@ export const routes: Routes = [
     path: 'access-denied',
     title: 'Not Found',
     component: AccessDeniedComponent,
+  },{
+    path: 'rented-cars',
+    title: 'List Car Rented',
+    component: RentedCarsComponent,
+    canActivate: [AuthGuard],
+    data: {
+        roles: ['customer']
+    }  
   },
   
   { path: '', redirectTo: "/home", pathMatch: 'full' },

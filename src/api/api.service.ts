@@ -20,5 +20,8 @@ export class ApiService {
   signup(data: any): Observable<any>{
     return this.http.post<any>('https://localhost:44360/api/General/register', data);
   }
-  
+  getRentalContractsByUserId(userId: string): Observable<any> {
+    const url = `https://localhost:44360/api/RentalContracts/user/${userId}`;
+    return this.http.get<any>(url, this.headerCustom);
+  }
 }
