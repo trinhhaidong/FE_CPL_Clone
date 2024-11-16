@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../../api/api.service';
+declare var $: any; // For jQuery
 
 @Component({
   selector: 'app-profile',
@@ -11,17 +13,19 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   userProfile: any = {};
   errorMessage: string | null = null;
   successMessage: string | null = null;
   editMode: boolean = false;
   profileForm: FormGroup;
+  avatarUrl: string = 'assets/images/default-profile.png';
 
   constructor(
     private authService: AuthService, 
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private apiService: ApiService
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
@@ -30,16 +34,68 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getProfile().subscribe(
-      response => {
-        this.userProfile = response;
-        // Sử dụng URL ảnh trực tiếp từ internet để kiểm tra
-        this.userProfile.photoUrl = 'https://th.bing.com/th?id=OIP.lAyVoPnPH3x8bL0Otns-jAHaFC&w=303&h=206&c=8&rs=1&qlt=90&o=6&dpr=2&pid=3.1&rm=2';
+    this.loadProfile();
+    this.initializeMagnificPopup();
+  }
+
+  ngAfterViewInit() {
+    $('.profile-photo-link').magnificPopup({
+      type: 'image',
+      closeOnContentClick: true,
+      closeBtnInside: true,
+      fixedContentPos: true,
+      mainClass: 'mfp-with-zoom mfp-img-mobile',
+      image: {
+        verticalFit: true
       },
-      error => {
-        this.errorMessage = error.error.message || 'Failed to load profile. Please try again.';
+      zoom: {
+        enabled: true,
+        duration: 300
       }
-    );
+    });
+  }
+
+  private loadProfile(): void {
+    this.authService.getProfile().subscribe({
+      next: (response) => {
+        this.userProfile = response;
+        this.loadAvatar(); // Load avatar sau khi có profile
+      },
+      error: (error) => {
+        this.errorMessage = error.error.message || 'Failed to load profile';
+      }
+    });
+  }
+
+  private loadAvatar(): void {
+    this.apiService.getAvatarUrl().subscribe({
+      next: (blob: Blob) => {
+        this.avatarUrl = this.apiService.createImageFromBlob(blob);
+      },
+      error: (error) => {
+        console.error('Error loading avatar:', error);
+        this.avatarUrl = 'assets/images/default-profile.png';
+      }
+    });
+  }
+
+  private initializeMagnificPopup(): void {
+    $('.profile-photo-link').magnificPopup({
+      type: 'image',
+      closeOnContentClick: false, // Changed to false to prevent accidental closing
+      enableEscapeKey: true,
+      mainClass: 'mfp-with-zoom mfp-img-mobile',
+      closeMarkup: '<button title="Close (Esc)" type="button" class="mfp-close">×</button>',
+      tLoading: 'Loading...',
+      image: {
+        verticalFit: true,
+        tError: '<a href="%url%">The image</a> could not be loaded.'
+      },
+      zoom: {
+        enabled: true,
+        duration: 300
+      }
+    });
   }
 
   toggleEditMode(): void {
@@ -57,7 +113,8 @@ export class ProfileComponent implements OnInit {
     if (file) {
       this.authService.uploadAvatar(file).subscribe({
         next: (response) => {
-          this.userProfile.photoUrl = response.filePath;
+          // Sau khi upload thành công, load lại avatar
+          this.loadAvatar();
           this.successMessage = 'Avatar updated successfully';
           setTimeout(() => this.successMessage = null, 3000);
         },

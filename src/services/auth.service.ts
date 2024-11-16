@@ -120,8 +120,7 @@ export class AuthService {
       console.log('Token expired');
       this.logout();
       alert('Your session has expired. Please login again.');
-    }, this.TOKEN_EXPIRATION_TIME);
-    console.log('Timer set for', this.TOKEN_EXPIRATION_TIME, 'ms');
+    }, this.TOKEN_EXPIRATION_TIME);    
   }
 
   private clearTokenExpirationTimer(): void {
@@ -140,7 +139,7 @@ export class AuthService {
           const timePassed = now - tokenTimestamp;
 
           if (timePassed < this.TOKEN_EXPIRATION_TIME) {
-            console.log('Activity detected, resetting timer');
+            // console.log('Activity detected, resetting timer');
             localStorage.setItem('tokenTimestamp', now.toString());
             this.setTokenExpirationTimer();
           }
@@ -157,5 +156,9 @@ export class AuthService {
     const formData = new FormData();
     formData.append('file', file);
     return this.apiService.uploadAvatar(formData);
+  }
+
+  getAvatarUrl(): Observable<Blob> {
+    return this.apiService.getAvatarUrl();
   }
 }

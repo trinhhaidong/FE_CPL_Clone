@@ -19,7 +19,12 @@
   
   <div class="profile-card">
     <div class="profile-photo-container">
-      <img [src]="userProfile.photoUrl || 'assets/images/default-profile.png'" alt="Profile Photo" class="profile-photo">
+      <a href="{{avatarUrl}}" class="profile-photo-link" title="Click to close">
+        <img [src]="avatarUrl" 
+             alt="Profile Photo" 
+             class="profile-photo"
+             (error)="avatarUrl = 'assets/images/default-profile.png'">
+      </a>
       <div class="upload-button">
         <label for="avatar-upload" class="btn-upload">
           <i class="fas fa-camera"></i>

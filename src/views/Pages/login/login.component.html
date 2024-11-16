@@ -12,9 +12,7 @@
 <section class="login">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="account-form">
     <div class="icon"><i class="fa-solid fa-user"></i></div>
-    <h3>Login</h3>
-    <div *ngIf="successMessage" class="alert alert-success" role="alert"> {{ successMessage }} </div> 
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{ errorMessage }}</div>
+    <h3>Login</h3>  
 
     <div class="input-field">
       <label for="email" class="far fa-envelope"></label>
@@ -36,7 +34,12 @@
     <div *ngIf="isInvalid('password')" style="color: red" class="box">
       {{ getFormError("password") }}
     </div>
-
+    <div *ngIf="successMessage" style="color: green; margin-bottom: 10px" class="box">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" style="color: red; margin-bottom: 10px" class="box">
+      {{ errorMessage }}
+    </div>
      <button type="submit" class="btn" id="login-btn">Login</button>
     <p>Don't have an account? <a class="link" routerLink="/register">Register</a></p>
     <p>Forgot your password? <a class="link" routerLink="/reset-password">Reset Password</a></p>
