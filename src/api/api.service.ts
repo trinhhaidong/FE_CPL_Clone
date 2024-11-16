@@ -28,4 +28,12 @@ export class ApiService {
   getProfile(): Observable<any> {
     return this.http.get<any>('https://localhost:44360/api/General/Get-profile', this.headerCustom);
   }
+
+  updateProfile(data: any): Observable<any> {
+    return this.http.put<any>('https://localhost:44360/api/General/update-profile', data, this.headerCustom);
+  }
+
+  uploadAvatar(formData: FormData): Observable<any> {
+    return this.http.post<any>('https://localhost:44360/api/General/upload-avatar', formData, this.headerCustom);
+  }
 }
