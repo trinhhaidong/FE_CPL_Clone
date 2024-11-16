@@ -34,6 +34,9 @@ export class LoginComponent implements OnInit {
       if (params['passwordChanged'] === 'success') {
         this.successMessage = 'Password changed successfully. Please log in with your new password.';
       }
+      if (params['registered'] === 'success') {
+        this.successMessage = 'Registration successful. Please log in.';
+      }
     });
   }
 
@@ -60,7 +63,6 @@ export class LoginComponent implements OnInit {
   }
 
   hideMessages(): void {
-    this.successMessage = null;
     this.errorMessage = null;
   }
 

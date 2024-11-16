@@ -73,8 +73,14 @@ export class ChangePasswordComponent implements OnInit {
         next: () => {
           this.successMessage = 'Password changed successfully';
           this.errorMessage = null;
-          this.authService.logout(); // Đăng xuất người dùng
-          this.router.navigate(['/login'], { queryParams: { passwordChanged: 'success' } });
+          
+          // Add delay before logout and navigation
+          setTimeout(() => {
+            this.authService.logout();
+            this.router.navigate(['/login'], { 
+              queryParams: { passwordChanged: 'success' } 
+            });
+          }, 2000); // 2 second delay
         },
         error: (error) => {
           this.successMessage = null;
