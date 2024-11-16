@@ -64,7 +64,10 @@ export class AuthService {
       return null;
     }
   }
-
+  handleGetCars(): Observable<any> {
+    return this.apiService.getCars();  
+  }
+  
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
