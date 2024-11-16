@@ -23,15 +23,7 @@ export const routes: Routes = [
       //   }
       // },
       // Add more child routes as needed
-      {
-        path: 'car-grid',
-        title: 'Car Grid',
-        component: CarGridComponent,
-        canActivate: [AuthGuard],
-        data: {
-            roles: ['customer']
-        } 
-    },
+      
     ]
   },
   {
@@ -54,7 +46,16 @@ export const routes: Routes = [
     title: 'Not Found',
     component: AccessDeniedComponent,
   },
-
+  {
+    path: 'car-grid',
+    title: 'Car Grid',
+    component: CarGridComponent,
+   
+    data: {
+        roles: ['customer']
+    } 
+   },
+   
   { path: '', redirectTo: "/home", pathMatch: 'full' },
   { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];
