@@ -44,7 +44,16 @@ export const routes: Routes = [
         roles: ['customer']
     }  
   },
-  
+  {
+    path: 'car-grid',
+    title: 'Car Grid',
+    component: CarGridComponent,
+   
+    data: {
+        roles: ['customer']
+    } 
+   },
+   
   { path: '', redirectTo: "/home", pathMatch: 'full' },
   { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];

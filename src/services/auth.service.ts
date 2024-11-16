@@ -83,6 +83,10 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+  handleGetCars(): Observable<any> {
+    return this.apiService.getCars();  
+  }
+  
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
