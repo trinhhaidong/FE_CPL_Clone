@@ -19,28 +19,31 @@
       <input type="text" formControlName="name" placeholder="Enter your name" id="name" class="box" [ngClass]="{ 'is-invalid': isInvalid('name') }" />
     </div>
     <div *ngIf="isInvalid('name')" style="color: red" class="box">
-      {{ getFormError("name", "Name") }}
+      {{ getFormError("name") }}
     </div>
     <div class="input-field">
       <label for="email" class="far fa-envelope"></label>
       <input type="email" formControlName="email" placeholder="Enter your email" id="email" class="box" [ngClass]="{ 'is-invalid': isInvalid('email') }" />
     </div>
     <div *ngIf="isInvalid('email')" style="color: red" class="box">
-      {{ getFormError("email", "Email") }}
+      {{ getFormError("email") }}
     </div>    
     <div class="input-field">
       <label for="phoneNumber" class="fas fa-phone"></label>
       <input type="text" formControlName="phoneNumber" placeholder="Enter your phoneNumber" id="phoneNumber" class="box" [ngClass]="{ 'is-invalid': isInvalid('phoneNumber') }" />
     </div>
     <div *ngIf="isInvalid('phoneNumber')" style="color: red" class="box">
-      {{ getFormError("phoneNumber", "PhoneNumber") }}
+      {{ getFormError("phoneNumber") }}
     </div>
     <div class="input-field">
       <label for="password" class="fas fa-lock"></label>
-      <input type="password" formControlName="password" placeholder="Enter your password" id="password" class="box" [ngClass]="{ 'is-invalid': isInvalid('password') }" />
+      <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Enter your password" id="password" class="box" [ngClass]="{ 'is-invalid': isInvalid('password') }" />
+      <div class="password-toggle" (click)="togglePasswordVisibility()">
+        <i class="fas" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
+      </div>
     </div>
     <div *ngIf="isInvalid('password')" style="color: red" class="box">
-      {{ getFormError("password", "Password") }}
+      {{ getFormError("password") }}
     </div>
     
     <div *ngIf="successMessage" style="color: green; margin-bottom: 10px" class="box">

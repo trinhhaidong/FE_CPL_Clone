@@ -12,9 +12,7 @@
 <section class="login">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="account-form">
     <div class="icon"><i class="fa-solid fa-user"></i></div>
-    <h3>Login</h3>
-    <div *ngIf="successMessage" class="alert alert-success" role="alert"> {{ successMessage }} </div> 
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert"> {{ errorMessage }}</div>
+    <h3>Login</h3>  
 
     <div class="input-field">
       <label for="email" class="far fa-envelope"></label>
@@ -22,30 +20,27 @@
         [ngClass]="{ 'is-invalid': isInvalid('email') }" (ngModelChange)="hideMessages()" />
     </div>
     <div *ngIf="isInvalid('email')" style="color: red" class="box">
-      {{ getFormError("email", "Email") }}
+      {{ getFormError("email") }}
     </div>
 
     <div class="input-field">
       <label for="password" class="fas fa-lock"></label>
       <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Enter your password" id="password" class="box"
-        [ngClass]="{ 'is-invalid': isInvalid('password') }" (ngModelChange)="hideMessages()" />
-      <div class="password-toggle" (click)="togglePasswordVisibility()">
-        <i class="fas" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
-      </div>
+        [ngClass]="{ 'is-invalid': isInvalid('password') }" (ngModelChange)="hideMessages()" > 
+        <div class="password-toggle" (click)="togglePasswordVisibility()">
+          <i class="fas" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
+        </div>
     </div>
     <div *ngIf="isInvalid('password')" style="color: red" class="box">
-      {{ getFormError("password", "Password") }}
+      {{ getFormError("password") }}
     </div>
-    
-    <div *ngIf="successMessage" style="color: rgb(15, 241, 15); margin-bottom: 10px" class="box">
+    <div *ngIf="successMessage" style="color: green; margin-bottom: 10px" class="box">
       {{ successMessage }}
     </div>
     <div *ngIf="errorMessage" style="color: red; margin-bottom: 10px" class="box">
       {{ errorMessage }}
     </div>
-
      <button type="submit" class="btn" id="login-btn">Login</button>
-    <!-- <button type="button" class="btn btn-google" (click)="loginWithGoogle()">Login with Google</button> --> -->
     <p>Don't have an account? <a class="link" routerLink="/register">Register</a></p>
     <p>Forgot your password? <a class="link" routerLink="/reset-password">Reset Password</a></p>
   </form>

@@ -1,0 +1,67 @@
+<div class="page-title">
+  <div class="title">
+    <h2>Profile</h2>
+  </div>
+  <div class="link">
+    <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+      <i class="fa-solid fa-house-chimney"></i> Home
+    </a>
+    <i class="fa-solid fa-angle-right"></i>
+    <span class="page">Profile</span>
+  </div>
+</div>
+
+<section class="profile">
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  
+  <div class="profile-card">
+    <div class="profile-photo-container">
+      <a href="{{avatarUrl}}" class="profile-photo-link" title="Click to close">
+        <img [src]="avatarUrl" 
+             alt="Profile Photo" 
+             class="profile-photo"
+             (error)="avatarUrl = 'assets/images/default-profile.png'">
+      </a>
+      <div class="upload-button">
+        <label for="avatar-upload" class="btn-upload">
+          <i class="fas fa-camera"></i>
+        </label>
+        <input 
+          type="file" 
+          id="avatar-upload" 
+          accept="image/*" 
+          (change)="onFileSelected($event)" 
+          style="display: none">
+      </div>
+    </div>
+
+    <div class="profile-info" *ngIf="!editMode">
+      <h3>{{ userProfile.name }}</h3>
+      <p><strong>Email:</strong> {{ userProfile.email }}</p>
+      <p><strong>Phone Number:</strong> {{ userProfile.phoneNumber }}</p>
+      <button class="btn btn-edit" (click)="toggleEditMode()">
+        <i class="fas fa-edit"></i> Edit Profile
+      </button>
+    </div>
+
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form" *ngIf="editMode">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" id="phoneNumber" formControlName="phoneNumber" class="form-control">
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-save" [disabled]="!profileForm.valid">Save</button>
+        <button type="button" class="btn btn-cancel" (click)="toggleEditMode()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</section>

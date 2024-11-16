@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -31,33 +31,38 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      if (params['passwordChanged'] === 'success') {
+        this.successMessage = 'Password changed successfully. Please log in with your new password.';
+      }
       if (params['registered'] === 'success') {
         this.successMessage = 'Registration successful. Please log in.';
       }
     });
   }
 
-  isInvalid(fieldName: string): boolean {
-    const control = this.loginForm.get(fieldName);
-    return control ? control.invalid && control.touched : false;
-  }
-
-  getFormError(fieldName: string, fieldDisplayName: string): string {
-    const control = this.loginForm.get(fieldName);
-    if (control && control.hasError('required')) {
-      return `${fieldDisplayName} is required`;
-    } else if (control && control.hasError('email')) {
-      return `${fieldDisplayName} is not a valid email`;
-    }
-    return '';
-  }
-
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
+  isInvalid(fieldName: string): boolean {
+    const field = this.loginForm.get(fieldName);
+    return field ? field.invalid && (field.dirty || field.touched) : false;
+  }
+
+  getFormError(fieldName: string): string {
+    const control = this.loginForm.get(fieldName);
+    if (control && control.errors) {
+      if (control.errors['required']) {
+        return 'This field is required';
+      }
+      if (control.errors['email']) {
+        return 'Invalid email format';
+      }
+    }
+    return '';
+  }
+
   hideMessages(): void {
-    this.successMessage = null;
     this.errorMessage = null;
   }
 
@@ -80,18 +85,4 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Please fill out all fields correctly.';
     }
   }
-  // loginWithGoogle(): void {
-  //   this.authService.loginWithGoogle().subscribe(
-  //     response => {
-  //       this.successMessage = 'Login successful';
-  //       this.errorMessage = null;
-  //       this.router.navigate(['/home']);
-  //     },
-  //     error => {
-  //       this.successMessage = null;
-  //       this.errorMessage = error.message || 'Login failed. Please try again.';
-  //     }
-  //   );
-  
-  // }
 }

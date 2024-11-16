@@ -8,28 +8,43 @@ import { CarGridComponent } from '../views/Cars/car-grid/car-grid.component';
 import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
 import { RentedCarsComponent } from '../views/Cars/rented-cars/rented-cars.component';
+import { ChangePasswordComponent } from '../views/Pages/change-password/change-password.component';
+import { ProfileComponent } from '../views/Pages/profile/profile.component';
 
 export const routes: Routes = [
   {
     path: 'home',
+    title: 'Home',
     component: HomePageComponent,
     children: [      
     ]
   },
   {
     path: 'login',
-    title: 'Đăng nhập',
+    title: 'login',
     component: LoginComponent,
   },
   {
     path: 'register',
-    title: 'Đăng ký',
+    title: 'Register',
     component: RegisterComponent,
   },
   {
     path: 'reset-password',
-    title: 'Đặt lại mật khẩu',
+    title: 'Reset Password',
     component: ResetPasswordComponent,
+  },
+  {
+    path: 'change-password',
+    title: 'Change Password',
+    canActivate: [AuthGuard],
+    component: ChangePasswordComponent,
+  },
+  {
+    path: 'profile',
+    title: 'Profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'access-denied',

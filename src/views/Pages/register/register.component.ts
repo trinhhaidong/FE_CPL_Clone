@@ -15,6 +15,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   successMessage: string | null = null;
   errorMessage: string | null = null;
+  showPassword: boolean =false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,32 +33,36 @@ export class RegisterComponent {
   }
 
   isInvalid(fieldName: string): boolean {
-    const control = this.registerForm.get(fieldName);
-    return control ? control.invalid && control.touched : false;
+    const field = this.registerForm.get(fieldName);
+    return field ? field.invalid && (field.dirty || field.touched) : false;
+  }
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  getFormError(fieldName: string, fieldDisplayName: string): string {
+  getFormError(fieldName: string): string {
     const control = this.registerForm.get(fieldName);
-
-    if (control && control.touched && control.errors) {
+    if (control && control.errors) {
       if (control.errors['required']) {
-        return `${fieldDisplayName} is required`;
-      } else if (control.errors['minlength']) {
-        return `${fieldDisplayName} must be at least ${control.errors['minlength'].requiredLength} characters`;
-      } else if (control.errors['pattern']) {
-        return `${fieldDisplayName} format is incorrect`;
-      } else if (control.errors['email']) {
-        return 'Please enter a valid email';
+        return 'This field is required';
+      }
+      if (control.errors['email']) {
+        return 'Invalid email format';
+      }
+      if (control.errors['minlength']) {
+        return 'Password must be at least 8 characters long';
+      }
+      if (control.errors['pattern']) {
+        return 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character';
       }
     }
-
     return '';
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      const { name ,email,phoneNumber,password} = this.registerForm.value;
-      this.authService.signup(name,email,phoneNumber,password).subscribe(
+      const { name, email, phoneNumber, password } = this.registerForm.value;
+      this.authService.signup(name, email, phoneNumber, password).subscribe(
         response => {
           this.successMessage = 'Register successful';
           this.errorMessage = null;
