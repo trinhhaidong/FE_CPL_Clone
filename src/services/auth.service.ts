@@ -68,10 +68,10 @@ export class AuthService {
       return null;
     }
   }
-  getRentalContractsByUserId(): Observable<CarRented[]> {
+  getRentalContractsByUserId(pageNumber: number, pageSize: number): Observable<{ data: CarRented[], totalItems: number }> {
     const userId = this.getUserId();
     if (userId) {
-      return this.apiService.getRentalContractsByUserId(userId).pipe(
+      return this.apiService.getRentalContractsByUserId(userId, pageNumber, pageSize).pipe(
         catchError(this.handleError)
       );
     } else {

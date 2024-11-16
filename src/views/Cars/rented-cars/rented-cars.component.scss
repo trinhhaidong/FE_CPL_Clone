@@ -16,7 +16,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  margin: 20px;
+  margin: auto; /* Căn giữa modal */
   padding: 20px;
   width: 90%;
   max-width: 500px;
@@ -92,6 +92,45 @@
 
 .btn-secondary:hover {
   background-color: #5a6268;
+}
+
+.pages-no {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pages-no .container {
+  display: flex;
+  align-items: center;
+}
+
+.pages-no .item {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.pages-no .item.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pages-no .numbers {
+  display: flex;
+}
+
+.pages-no .numbers .item {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.pages-no .numbers .item.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
 }
 
 @keyframes fadeIn {

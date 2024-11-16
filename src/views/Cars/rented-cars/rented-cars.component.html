@@ -51,7 +51,7 @@
                 <div class="content">
                     <h2>{{ car.name }}</h2>
                     <div class="details">
-                        <h3><i class="fa-solid fa-car"></i><span>{{ car.name }}</span></h3>
+                        <h3><i class="fa-solid fa-car"></i><span>{{ car.madeIn }}</span></h3>
                         <h3><i class="fa-solid fa-user-group"></i><span>{{ car.seats }} people</span></h3>
                         <h3><i class="fa-solid fa-suitcase-rolling"></i><span>{{ car.model }}</span></h3>
                         <h3><i class="fa-solid fa-gear"></i><span>{{ car.brand }}</span></h3>
@@ -65,25 +65,28 @@
                     <button (click)="confirmReturnCar(car.contractId)" class="btn">Return Car</button>
                 </div>
             </div> 
-            
+            <div class="pages-no">
+              <div class="container">
+                <div class="item" (click)="goToPage(currentPage - 1)" [class.disabled]="currentPage === 1">
+                  <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="numbers">
+                  <div *ngFor="let page of [].constructor(totalPages); let i = index" 
+                       class="item" 
+                       [class.active]="currentPage === i + 1" 
+                       (click)="goToPage(i + 1)">
+                    {{ i + 1 }}
+                  </div>
+                </div>
+                <div class="item" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </div>
+            </div>
             
         </div>
 
-        <div class="pages-no">
-            <div class="container">
-                <div class="item">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <div class="numbers">
-                    <div class="item active">1</div>
-                    <div class="item">2</div>
-                    <div class="item">3</div>
-                </div>
-                <div class="item">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </div> 
-        </div>
+        
     </section>
     <div *ngIf="showConfirmModal" class="modal">
         <div class="modal-dialog">

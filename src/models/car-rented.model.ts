@@ -1,5 +1,6 @@
 export interface CarRented { 
     name: string;
+    madeIn: string;
     contractId: string;
     licensePlate: string;
     brand: string;
