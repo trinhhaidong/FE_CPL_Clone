@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api/api.service';
-import { Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Auth, GoogleAuthProvider, signInWithPopup, UserCredential } from '@angular/fire/auth';
+import { CarRented } from '../models/car-rented.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,10 @@ export class AuthService {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = this.parseJwt(token);
-      return decodedToken ? decodedToken.sub : null; // 'sub' is the standard claim for subject (UserId)
+      const userId = decodedToken ? decodedToken.sub : null; // 'sub' is the standard claim for subject (UserId)
+      if (userId) {
+        return userId;
+      }
     }
     return null;
   }
@@ -64,7 +68,21 @@ export class AuthService {
       return null;
     }
   }
-
+  getRentalContractsByUserId(pageNumber: number, pageSize: number): Observable<{ data: CarRented[], totalItems: number }> {
+    const userId = this.getUserId();
+    if (userId) {
+      return this.apiService.getRentalContractsByUserId(userId, pageNumber, pageSize).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      throw new Error('User ID is not available');
+    }
+  }
+  cancelRentalContract(contractId: string): Observable<any> {
+    return this.apiService.cancelRentalContract(contractId).pipe(
+      catchError(this.handleError)
+    );
+  }
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

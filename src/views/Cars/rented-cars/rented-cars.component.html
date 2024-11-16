@@ -1,0 +1,114 @@
+<body>
+
+    <!-- ==================== Scroll-Top Area (Start) ==================== -->
+    <a href="#" class="scroll-top">
+        <i class="fas fa-long-arrow-alt-up"></i>
+    </a>
+    <!-- ==================== Scroll-Top Area (End) ==================== -->
+
+    <!-- ==================== Page-Title (Start) ==================== -->
+    <div class="page-title">
+        <div class="title">
+            <h2>Car Grid</h2>
+        </div> 
+        <div class="link">
+            <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+                <i class="fa-solid fa-house-chimney"></i> Home
+            </a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span class="page">Car Grid</span>
+        </div>
+    </div>
+    <!-- ==================== Page-Title (End) ==================== -->
+
+    <!-- ==================== Car-Grid Area (Start) ==================== -->
+    <section class="cars">
+        <div class="intro">
+            <div class="showing">showing {{ rentalContracts.length }} of {{ rentalContracts.length }} cars</div>
+            <div class="styles">
+                <a href="Car-Grid.html" class="fas fa-th"></a>
+                <a href="Car-List.html" class="fas fa-list"></a>               
+            </div>
+            <div class="sorting-type">
+                <select name="sort" id="sort">
+                    <option value="default">default sorting</option>
+                    <option value="name, A to Z">sort by popularity</option>
+                    <option value="mname, Z to A">sort by latest</option>
+                    <option value="price, low to high">sort by average price</option>
+                    <option value="price, low to high">sort by price: low to high</option>
+                    <option value="price, high to low">sort by price: high to low</option>
+                </select>
+            </div>
+        </div> 
+
+        <div class="car-container grid">
+           
+            <div *ngFor="let car of rentalContracts" class="car-item">
+                <div class="image">
+                    <img [src]="car.imageUrls[0] || '../../assets/images/Cars/Cars/Car-1.jpg'" alt="Car Image">
+                    <div class="price">${{ car.price }}<span>/day</span></div>
+                </div>
+                <div class="content">
+                    <h2>{{ car.name }}</h2>
+                    <div class="details">
+                        <h3><i class="fa-solid fa-car"></i><span>{{ car.madeIn }}</span></h3>
+                        <h3><i class="fa-solid fa-user-group"></i><span>{{ car.seats }} people</span></h3>
+                        <h3><i class="fa-solid fa-suitcase-rolling"></i><span>{{ car.model }}</span></h3>
+                        <h3><i class="fa-solid fa-gear"></i><span>{{ car.brand }}</span></h3>
+                        <h3><i class="fa-solid fa-palette"></i><span>{{ car.color }}</span></h3>
+                        <h3><i class="fa-solid fa-id-card"></i><span>{{ car.licensePlate }}</span></h3> 
+                        <h3><i class="fa-solid fa-calendar"></i><span>Rental Date: {{ car.rentalDate }}</span></h3>
+                        <h3><i class="fa-solid fa-clock"></i><span>Rental Time: {{ car.rentalTime }}</span></h3>
+                        <h3><i class="fa-solid fa-calendar"></i><span>Return Date: {{ car.returnDate }}</span></h3>
+                        <h3><i class="fa-solid fa-clock"></i><span>Return Time: {{ car.returnTime }}</span></h3>  
+                    </div>
+                    <button (click)="confirmReturnCar(car.contractId)" class="btn">Return Car</button>
+                </div>
+            </div> 
+            <div class="pages-no">
+              <div class="container">
+                <div class="item" (click)="goToPage(currentPage - 1)" [class.disabled]="currentPage === 1">
+                  <i class="fas fa-arrow-left"></i>
+                </div>
+                <div class="numbers">
+                  <div *ngFor="let page of [].constructor(totalPages); let i = index" 
+                       class="item" 
+                       [class.active]="currentPage === i + 1" 
+                       (click)="goToPage(i + 1)">
+                    {{ i + 1 }}
+                  </div>
+                </div>
+                <div class="item" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+
+        
+    </section>
+    <div *ngIf="showConfirmModal" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close" (click)="closeModal()">&times;</span>
+              <h4 class="modal-title">Confirm Return</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to return this car?</p>
+            </div>
+            <div class="modal-footer">
+              <button (click)="cancelRentalContract()" class="btn btn-primary">Confirm</button>
+              <button (click)="closeModal()" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+    <!-- ==================== Car-Grid Area (End) ==================== -->
+    
+</body>
+
+
+

@@ -1,0 +1,143 @@
+.modal {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: hidden; 
+  background-color: rgba(0,0,0,0.6); 
+}
+
+.modal-dialog {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  margin: auto; /* Căn giữa modal */
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+.modal-body {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 10px;
+}
+
+.modal-footer .btn {
+  margin-left: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.pages-no {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pages-no .container {
+  display: flex;
+  align-items: center;
+}
+
+.pages-no .item {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.pages-no .item.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pages-no .numbers {
+  display: flex;
+}
+
+.pages-no .numbers .item {
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 5px;
+  font-size: 20px;
+}
+
+.pages-no .numbers .item.active {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -7,31 +7,13 @@ import { ResetPasswordComponent } from '../views/Pages/reset-password/reset-pass
 import { CarGridComponent } from '../views/Cars/car-grid/car-grid.component'; 
 import { AuthGuard } from '../services/auth.guard';
 import { RoleGuard } from '../services/role.guard';
+import { RentedCarsComponent } from '../views/Cars/rented-cars/rented-cars.component';
 
 export const routes: Routes = [
   {
     path: 'home',
     component: HomePageComponent,
-    children: [
-      // {
-      //   path: 'access-denied',
-      //   component: ,
-      //   title: 'Quản lý cài đặt',
-      //   canActivate: [AuthGuard, RoleGuard],
-      //   data: {
-      //     roles: ['customer'] // Vai trò được phép truy cập
-      //   }
-      // },
-      // Add more child routes as needed
-      {
-        path: 'car-grid',
-        title: 'Car Grid',
-        component: CarGridComponent,
-        canActivate: [AuthGuard],
-        data: {
-            roles: ['customer']
-        } 
-    },
+    children: [      
     ]
   },
   {
@@ -53,8 +35,16 @@ export const routes: Routes = [
     path: 'access-denied',
     title: 'Not Found',
     component: AccessDeniedComponent,
+  },{
+    path: 'rented-cars',
+    title: 'List Car Rented',
+    component: RentedCarsComponent,
+    canActivate: [AuthGuard],
+    data: {
+        roles: ['customer']
+    }  
   },
-
+  
   { path: '', redirectTo: "/home", pathMatch: 'full' },
   { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];
