@@ -78,6 +78,11 @@ export class AuthService {
       throw new Error('User ID is not available');
     }
   }
+  cancelRentalContract(contractId: string): Observable<any> {
+    return this.apiService.cancelRentalContract(contractId).pipe(
+      catchError(this.handleError)
+    );
+  }
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

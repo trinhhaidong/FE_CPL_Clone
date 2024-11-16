@@ -1,5 +1,6 @@
 export interface CarRented { 
     name: string;
+    contractId: string;
     licensePlate: string;
     brand: string;
     model: string;
@@ -8,4 +9,8 @@ export interface CarRented {
     year: string;
     price: string;
     imageUrls: string[];  
+    rentalDate: string;
+    returnDate: string;
+    rentalTime: string;
+    returnTime?: string;
   }

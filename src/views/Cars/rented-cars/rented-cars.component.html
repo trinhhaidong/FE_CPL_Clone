@@ -12,7 +12,9 @@
             <h2>Car Grid</h2>
         </div> 
         <div class="link">
-            <a href="../../index-2.html"><i class="fa-solid fa-house-chimney"></i> Home</a>
+            <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">
+                <i class="fa-solid fa-house-chimney"></i> Home
+            </a>
             <i class="fa-solid fa-angle-right"></i>
             <span class="page">Car Grid</span>
         </div>
@@ -43,40 +45,28 @@
            
             <div *ngFor="let car of rentalContracts" class="car-item">
                 <div class="image">
-                    <img [src]="car.imageUrls?.[0] || '../../assets/images/Cars/Cars/Car-1.jpg'" alt="Car Image">
+                    <img [src]="car.imageUrls[0] || '../../assets/images/Cars/Cars/Car-1.jpg'" alt="Car Image">
                     <div class="price">${{ car.price }}<span>/day</span></div>
                 </div>
                 <div class="content">
                     <h2>{{ car.name }}</h2>
                     <div class="details">
-                        <h3><i class="fa-solid fa-car"></i><span>{{ car.year }}</span></h3>
+                        <h3><i class="fa-solid fa-car"></i><span>{{ car.name }}</span></h3>
                         <h3><i class="fa-solid fa-user-group"></i><span>{{ car.seats }} people</span></h3>
                         <h3><i class="fa-solid fa-suitcase-rolling"></i><span>{{ car.model }}</span></h3>
                         <h3><i class="fa-solid fa-gear"></i><span>{{ car.brand }}</span></h3>
-                        <h3><i class="fa-solid fa-gas-pump"></i><span>{{ car.color }}</span></h3>
-                        <h3><i class="fa-solid fa-road"></i><span>{{ car.licensePlate }}</span></h3>   
+                        <h3><i class="fa-solid fa-palette"></i><span>{{ car.color }}</span></h3>
+                        <h3><i class="fa-solid fa-id-card"></i><span>{{ car.licensePlate }}</span></h3> 
+                        <h3><i class="fa-solid fa-calendar"></i><span>Rental Date: {{ car.rentalDate }}</span></h3>
+                        <h3><i class="fa-solid fa-clock"></i><span>Rental Time: {{ car.rentalTime }}</span></h3>
+                        <h3><i class="fa-solid fa-calendar"></i><span>Return Date: {{ car.returnDate }}</span></h3>
+                        <h3><i class="fa-solid fa-clock"></i><span>Return Time: {{ car.returnTime }}</span></h3>  
                     </div>
-                    <a href="Cart.html" class="btn">Rent Car</a>
+                    <button (click)="confirmReturnCar(car.contractId)" class="btn">Return Car</button>
                 </div>
-            </div>
-            <div class="car-item"> 
-                <div class="image">
-                    <img src="../../assets/images/Cars/Cars/Car-1.jpg" alt="">
-                    <div class="price">$100<span>/day</span></div>
-                </div>
-                <div class="content">
-                    <a href="Single-Car.html"><h2>xe</h2></a> 
-                    <div class="details">
-                        <h3><i class="fa-solid fa-car"></i><span>2023</span></h3>
-                        <h3><i class="fa-solid fa-user-group"></i><span>2 people</span></h3>
-                        <h3><i class="fa-solid fa-suitcase-rolling"></i><span>1 luggage</span></h3>
-                        <h3><i class="fa-solid fa-gear"></i><span>automatic</span></h3>
-                        <h3><i class="fa-solid fa-gas-pump"></i><span>Petrol</span></h3>
-                        <h3><i class="fa-solid fa-road"></i><span>7.4 kmpl</span></h3>
-                    </div> 
-                    <a href="Cart.html" class="btn">rent car</a>
-                </div>
-            </div>
+            </div> 
+            
+            
         </div>
 
         <div class="pages-no">
@@ -95,6 +85,27 @@
             </div> 
         </div>
     </section>
+    <div *ngIf="showConfirmModal" class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close" (click)="closeModal()">&times;</span>
+              <h4 class="modal-title">Confirm Return</h4>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to return this car?</p>
+            </div>
+            <div class="modal-footer">
+              <button (click)="cancelRentalContract()" class="btn btn-primary">Confirm</button>
+              <button (click)="closeModal()" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        
     <!-- ==================== Car-Grid Area (End) ==================== -->
-
+    
 </body>
+
+
+
