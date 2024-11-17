@@ -180,4 +180,12 @@ export class AuthService {
   getAvatarUrl(): Observable<Blob> {
     return this.apiService.getAvatarUrl();
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.apiService.forgotPassword({ email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.apiService.resetPassword({ token, newPassword });
+  }
 }

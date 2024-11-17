@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { CarRented } from '../models/car-rented.model';
+import { ForgotPasswordRequest, ResetPasswordRequest } from '../models/password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -69,5 +70,13 @@ export class ApiService {
   }
   getCars(): Observable<any> {
     return this.http.get<any>('https://localhost:44360/api/Car/all-car');
+  }
+
+  forgotPassword(data: ForgotPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/forgot-password`, data);
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/reset-password`, data);
   }
 }
