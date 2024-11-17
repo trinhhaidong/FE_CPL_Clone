@@ -14,10 +14,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
     this.headerCustom = { headers: { "Authorization": "Bearer " + localStorage.getItem("token") } }
 
-  }  
+  }
   private baseUrl = 'https://localhost:44360/api';
   private imageBaseUrl = 'https://localhost:44360'; // Add this line
-  
+
   // Add method to get full image URL
   getFullImageUrl(relativePath: string): string {
     if (!relativePath) return '';
@@ -69,5 +69,9 @@ export class ApiService {
   }
   getCars(): Observable<any> {
     return this.http.get<any>('https://localhost:44360/api/Car/all-car');
+  }
+
+  searchCar(query: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/Car/search-car?query=${query}`, this.headerCustom);
   }
 }
