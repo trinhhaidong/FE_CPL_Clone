@@ -180,4 +180,9 @@ export class AuthService {
   getAvatarUrl(): Observable<Blob> {
     return this.apiService.getAvatarUrl();
   }
+  addCar(carData: any): Observable<any> {
+    return this.apiService.addCar(carData).pipe(
+      catchError(this.handleError)
+    );
+  }
 }

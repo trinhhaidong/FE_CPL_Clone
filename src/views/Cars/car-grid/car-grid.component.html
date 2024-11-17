@@ -83,43 +83,66 @@
 
 <!-- ==================== Car-Grid Area (Start) ==================== -->
 <section class="cars">
-    <div class="intro">
-      <div class="showing">showing 6 of 20 cars</div>
-      <div class="styles">
-        <a href="Car-Grid.html" class="fas fa-th"></a>
+  <div class="intro">
+    <div class="showing">
+      Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to 
+      {{ currentPage * itemsPerPage > cars.length ? cars.length : currentPage * itemsPerPage }}
+      of {{ cars.length }} cars
+    </div>
+    <div class="styles">
+      <a href="#" class="fas fa-th"></a>
+    </div>
+    <div class="sorting-type">
+      <select name="sort" id="sort">
+        <option value="default">Default sorting</option>
+        <option value="popularity">Sort by popularity</option>
+        <option value="latest">Sort by latest</option>
+        <option value="average-price">Sort by average price</option>
+        <option value="low-to-high">Sort by price: low to high</option>
+        <option value="high-to-low">Sort by price: high to low</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Danh sách xe -->
+  <div class="car-container grid">
+    <div *ngFor="let car of displayedCars" class="car-item">
+      <div class="image">
+        <img [src]="getCarImagePath(car)" alt="{{ car.name }}">
       </div>
-      <div class="sorting-type">
-        <select name="sort" id="sort">
-          <option value="default">default sorting</option>
-          <option value="popularity">sort by popularity</option>
-          <option value="latest">sort by latest</option>
-          <option value="average-price">sort by average price</option>
-          <option value="low-to-high">sort by price: low to high</option>
-          <option value="high-to-low">sort by price: high to low</option>
-        </select>
+      <div class="content">
+        <h2>{{ car.name }}</h2>
+        <div class="details">
+          <h3><i class="fa-solid fa-car"></i><span>Brand: {{ car.brand }}</span></h3>
+          <h3><i class="fa-solid fa-car"></i><span>Price: {{ car.price }}</span></h3>
+          <h3><i class="fa-solid fa-tag"></i><span>Model: {{ car.model }}</span></h3>
+          <h3><i class="fa-solid fa-palette"></i><span>Color: {{ car.color }}</span></h3>
+          <h3><i class="fa-solid fa-user-group"></i><span>Seats: {{ car.seats }} people</span></h3>
+          <h3><i class="fa-solid fa-calendar"></i><span>Year: {{ car.year }}</span></h3>
+          <h3><i class="fa-solid fa-globe"></i><span>Made In: {{ car.madeIn }}</span></h3>
+          <h3><i class="fa-solid fa-road"></i><span>Mileage: {{ car.mileage }} kmpl</span></h3>
+          <h3><i class="fa-solid fa-circle"></i><span>Status: {{ car.status }}</span></h3>
+        </div>
+        <div class="description">
+          <p>{{ car.description }}</p>
+        </div>
+        <a href="Cart.html" class="btn">Rent Car</a>
       </div>
     </div>
+  </div>
   
-    <div class="car-container grid">
-      <div *ngFor="let car of cars" class="car-item">
-        <div class="image">
-          <img [src]="car.images[0]" alt="{{ car.name }}">
-          <div class="price">{{ car.price }}<span>/day</span></div>
-        </div>
-        <div class="content">
-          <a href="Single-Car.html"><h2>{{ car.name }}</h2></a>
-          <div class="details">
-            <h3><i class="fa-solid fa-car"></i><span>{{ car.year }}</span></h3>
-            <h3><i class="fa-solid fa-user-group"></i><span>{{ car.seats }} people</span></h3>
-            <h3><i class="fa-solid fa-suitcase-rolling"></i><span>{{ car.madeIn }}</span></h3>
-            <h3><i class="fa-solid fa-gear"></i><span>{{ car.status }}</span></h3>
-            <h3><i class="fa-solid fa-gas-pump"></i><span>{{ car.mileage }} kmpl</span></h3>
-          </div>
-          <a href="Cart.html" class="btn">rent car</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Nút phân trang -->
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      Next
+    </button>
+  </div>
+</section>
+
 
 
 
