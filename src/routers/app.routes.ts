@@ -11,6 +11,7 @@ import { RentedCarsComponent } from '../views/Cars/rented-cars/rented-cars.compo
 import { ChangePasswordComponent } from '../views/Pages/change-password/change-password.component';
 import { ProfileComponent } from '../views/Pages/profile/profile.component';
 import { AuthLoginGuard } from '../guards/auth-login.guard';
+import { VerifyEmailComponent } from '../views/Pages/verify-email/verify-email.component';
 
 export const routes: Routes = [
   {
@@ -73,7 +74,11 @@ export const routes: Routes = [
         roles: ['customer']
     } 
    },
-   
+  {
+    path: 'verify-email',
+    title: 'Verify Email',
+    component: VerifyEmailComponent,
+  },
   { path: '', redirectTo: "/home", pathMatch: 'full' },
   { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];

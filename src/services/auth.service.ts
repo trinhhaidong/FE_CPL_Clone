@@ -188,4 +188,9 @@ export class AuthService {
   resetPassword(token: string, newPassword: string): Observable<any> {
     return this.apiService.resetPassword({ token, newPassword });
   }
+
+  verifyEmail(token: string, email: string): Observable<any> {
+    return this.apiService.verifyEmail({ token, email });
+  }
 }
+
