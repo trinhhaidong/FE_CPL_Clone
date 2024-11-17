@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { CarRented } from '../models/car-rented.model';
+import { ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest } from '../models/password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +74,16 @@ export class ApiService {
 
   searchCar(query: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/Car/search-car?query=${query}`, this.headerCustom);
+  }
+  forgotPassword(data: ForgotPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/forgot-password`, data);
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/reset-password`, data);
+  }
+
+  verifyEmail(data: VerifyEmailRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/verify-email`, data);
   }
 }

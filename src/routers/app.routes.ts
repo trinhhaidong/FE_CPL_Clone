@@ -5,11 +5,13 @@ import { RegisterComponent } from '../views/Pages/register/register.component';
 import { AccessDeniedComponent } from '../views/About/access-denied/access-denied.component';
 import { ResetPasswordComponent } from '../views/Pages/reset-password/reset-password.component';
 import { CarGridComponent } from '../views/Cars/car-grid/car-grid.component'; 
-import { AuthGuard } from '../services/auth.guard';
-import { RoleGuard } from '../services/role.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { RoleGuard } from '../guards/role.guard';
 import { RentedCarsComponent } from '../views/Cars/rented-cars/rented-cars.component';
 import { ChangePasswordComponent } from '../views/Pages/change-password/change-password.component';
 import { ProfileComponent } from '../views/Pages/profile/profile.component';
+import { AuthLoginGuard } from '../guards/auth-login.guard';
+import { VerifyEmailComponent } from '../views/Pages/verify-email/verify-email.component';
 
 export const routes: Routes = [
   {
@@ -23,16 +25,19 @@ export const routes: Routes = [
     path: 'login',
     title: 'login',
     component: LoginComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'register',
     title: 'Register',
     component: RegisterComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'reset-password',
     title: 'Reset Password',
     component: ResetPasswordComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'change-password',
@@ -50,7 +55,8 @@ export const routes: Routes = [
     path: 'access-denied',
     title: 'Not Found',
     component: AccessDeniedComponent,
-  },{
+  },
+  {
     path: 'rented-cars',
     title: 'List Car Rented',
     component: RentedCarsComponent,
@@ -68,7 +74,11 @@ export const routes: Routes = [
         roles: ['customer']
     } 
    },
-   
+  {
+    path: 'verify-email',
+    title: 'Verify Email',
+    component: VerifyEmailComponent,
+  },
   { path: '', redirectTo: "/home", pathMatch: 'full' },
   { path: '**', redirectTo: "/access-denied" } // Chuyển hướng đến trang access-denied nếu URL không hợp lệ
 ];
