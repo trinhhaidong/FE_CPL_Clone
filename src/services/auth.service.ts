@@ -172,9 +172,7 @@ export class AuthService {
   }
 
   uploadAvatar(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-    return this.apiService.uploadAvatar(formData);
+    return this.apiService.uploadAvatar(file);
   }
 
   getAvatarUrl(): Observable<Blob> {
@@ -192,5 +190,8 @@ export class AuthService {
   verifyEmail(token: string, email: string): Observable<any> {
     return this.apiService.verifyEmail({ token, email });
   }
-}
 
+  getAvatar(): Observable<Blob> {
+    return this.apiService.getAvatar();
+  }
+}
