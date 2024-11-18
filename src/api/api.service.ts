@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { CarRented } from '../models/car-rented.model';
+import { ForgotPasswordRequest, ResetPasswordRequest, VerifyEmailRequest } from '../models/password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,10 @@ export class ApiService {
   constructor(private http: HttpClient) {
     this.headerCustom = { headers: { "Authorization": "Bearer " + localStorage.getItem("token") } }
 
-  }  
+  }
   private baseUrl = 'https://localhost:44360/api';
   private imageBaseUrl = 'https://localhost:44360'; // Add this line
-  
+
   // Add method to get full image URL
   getFullImageUrl(relativePath: string): string {
     if (!relativePath) return '';
@@ -73,5 +74,20 @@ export class ApiService {
   }
   addCar(carData: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/Car/add-car`, carData, this.headerCustom);
+  }
+
+  searchCar(query: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/Car/search-car?query=${query}`, this.headerCustom);
+  }
+  forgotPassword(data: ForgotPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/forgot-password`, data);
+  }
+
+  resetPassword(data: ResetPasswordRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/reset-password`, data);
+  }
+
+  verifyEmail(data: VerifyEmailRequest): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/General/verify-email`, data);
   }
 }
