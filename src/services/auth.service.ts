@@ -4,7 +4,7 @@ import { catchError, Observable, throwError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Auth, GoogleAuthProvider, signInWithPopup, UserCredential } from '@angular/fire/auth';
 import { CarRented } from '../models/car-rented.model';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -118,9 +118,9 @@ export class AuthService {
     );
   }
   handleGetCars(): Observable<any> {
-    return this.apiService.getCars();  
+    return this.apiService.getCars();
   }
-  
+ 
   private handleError(error: any) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -185,6 +185,22 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+  getCarById(id: string): Observable<any> {
+    return this.apiService.getCarById(id);
+  }
+  deleteCar(carId: string): Observable<any> {
+    return this.apiService.deleteCar(carId).pipe(
+      catchError((error) => {
+        console.error('Error deleting car:', error);
+        return throwError(() => new Error('Failed to delete car.'));
+      })
+    );
+  }
+  // Cập nhật thông tin của một chiếc xe
+  updateCar(carId: string, carData: any): Observable<any> {
+    return this.apiService.updateCar(carId, carData);
+  }
+  
   forgotPassword(email: string): Observable<any> {
     return this.apiService.forgotPassword({ email });
   }
