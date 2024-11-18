@@ -2,6 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 
+interface Car {
+  CarId: string;
+  Name: string;
+  LicensePlate: string;
+  Brand: string;
+  Model: string;
+  Color: string;
+  Seats: number;
+  Year: number;
+  MadeIn: string;
+  Mileage: number;
+  Status: string;
+  Price: number;
+  Description: string;
+  Images: string[];
+}
 @Component({
   selector: 'app-car-grid',
   standalone: true,
@@ -36,14 +52,18 @@ export class CarGridComponent implements OnInit {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.cars.slice(startIndex, startIndex + this.itemsPerPage);
   }
-
+  getCarImagePath(car: any): string {
+    if (car.images && car.images.length > 0) {
+      return `data:image/jpeg;base64,${car.images[0]}`; // Hiển thị ảnh đầu tiên
+    }
+    return 'path/to/default/image.jpg'; // Ảnh mặc định
+  }
+  
   // Tổng số trang
   get totalPages() {
     return Math.ceil(this.cars.length / this.itemsPerPage);
   }
-  getCarImagePath(car: any): string {
-    return `path/to/car/image/${car.LicensePlate}.jpg`;
-  }
+  
   // Chuyển trang
   changePage(page: number) {
     this.currentPage = page;
