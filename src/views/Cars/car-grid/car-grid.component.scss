@@ -1,0 +1,16 @@
+.car-container.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Hiển thị 2 ô một dòng
+    gap: 20px;
+  }
+  
+  .car-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  

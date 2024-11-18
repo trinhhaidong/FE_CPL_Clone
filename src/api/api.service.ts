@@ -79,10 +79,23 @@ export class ApiService {
     const url = `https://localhost:44360/api/RentalContracts/${contractId}/cancel`;
     return this.http.post<any>(url, {}, this.headerCustom);
   }
+  
   getCars(): Observable<any> {
-    return this.http.get<any>('https://localhost:44360/api/Car/all-car');
+    return this.http.get<any>(`${this.baseUrl}/Car/all-car`);
+  }
+  addCar(carData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/Car/add-car`, carData);
+  }
+  getCarById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/Car/get-car/${id}`);
   }
 
+  updateCar(carId: string, carData: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}/Car/edit-car/${carId}`, carData);
+  }
+  deleteCar(carData: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/Car/id`, carData);
+  }
   searchCar(query: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/Car/search-car?query=${query}`, this.headerCustom);
   }
