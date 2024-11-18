@@ -13,6 +13,8 @@ import { ProfileComponent } from '../views/Pages/profile/profile.component';
 import { AuthLoginGuard } from '../guards/auth-login.guard';
 import { VerifyEmailComponent } from '../views/Pages/verify-email/verify-email.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { EditCarComponent } from '../views/Cars/edit-car/edit-car.component';
+import { AdminCarComponent } from '../views/Cars/admin-car/admin-car.component';
 
 export const routes: Routes = [
   {
@@ -80,6 +82,18 @@ export const routes: Routes = [
    component: AddCarComponent,
    canActivate: [AuthGuard] // Add guard if needed
  },
+ {
+  path: 'edit-car',
+  title: 'Edit Car',
+  component: EditCarComponent,
+  canActivate: [AuthGuard] // Add guard if needed
+},
+{
+  path: 'admin-car',
+  title: 'Admin Car',
+  component: AdminCarComponent,
+  canActivate: [AuthGuard] // Add guard if needed
+},
    
   {
     path: 'verify-email',
